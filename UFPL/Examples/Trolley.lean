@@ -51,7 +51,7 @@ def M : Model SigT :=
   , T     := Nat
   , le    := Nat.le
   , Rbox  := fun w w' => match w with
-                | .w0 => w' = .w0 ∨ w' = .wD ∨ w' = .wN
+                | .w0 => w' = .wD ∨ w' = .wN
                 | .wD => w' = .wD
                 | .wN => w' = .wN
   , RK    := fun _ _ _ => True
@@ -82,6 +82,9 @@ def facts : Form :=
   let f2 := Form.imp (Form.not φDivert) (Form.and φKill5 (Form.not φKill1))
   Form.and f1 (Form.and f2 (Form.and (Form.or φKill1 φKill5)
                                      (Form.not (Form.and φKill1 φKill5))))
+
+/-- Laws in all outcome worlds reachable from w0 -/
+def factsNec : Form := Form.box facts
 
 /-- "If exactly one dies, obligation is to avoid 5 deaths." -/
 def lesserEvil : Form :=
@@ -117,7 +120,6 @@ def E : EvalSupport M :=
       Nat.ble t t'
   , rboxB  := fun w w' =>
       match w, w' with
-      | .w0, .w0 => true
       | .w0, .wD => true
       | .w0, .wN => true
       | .wD, .wD => true
@@ -142,5 +144,6 @@ def ObligationToDivertP : Prop := sat M W.w0 (0 : Nat) ρ targetObligation
 def FactsHoldAtW0B      : Bool := satB M E W.w0 (0 : Nat) ρ facts
 def LesserEvilAtW0B     : Bool := satB M E W.w0 (0 : Nat) ρ lesserEvil
 def ObligationToDivertB : Bool := satB M E W.w0 (0 : Nat) ρ targetObligation
+def FactsNecAtW0B       : Bool := satB M E W.w0 (0 : Nat) ρ factsNec
 
 end UFPL.Examples

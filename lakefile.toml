@@ -1,6 +1,6 @@
 name = "ufpl"
 version = "0.1.0"
-defaultTargets = ["ufpl"]
+defaultTargets = ["ufpl", "UFPL"]
 
 [[lean_lib]]
 name = "UFPL"

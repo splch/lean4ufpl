@@ -3,3 +3,4 @@
 import UFPL.Core.Types
 import UFPL.Core.Syntax
 import UFPL.Core.Semantics
+import UFPL.Core.EvalBool
