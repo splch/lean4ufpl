@@ -1,0 +1,10 @@
+name = "ufpl"
+version = "0.1.0"
+defaultTargets = ["ufpl"]
+
+[[lean_lib]]
+name = "UFPL"
+
+[[lean_exe]]
+name = "ufpl"
+root = "Main"
